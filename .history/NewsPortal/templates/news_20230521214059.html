@@ -31,17 +31,17 @@ News
 {% block content %}
 <hr>
 <!-- Перед таблицей добавим форму для поиска -->
-<font color="black">
+<font color="white">
 <form method="GET">
     {{ filter.form }} <!-- Форму от фильтров за нас сделает Django. А вот кнопку, увы, придётся делать самому -->
     <input type="submit" value="Найти">
 </form>
-</font>
+
 <hr>
    
     <h1>Все новости</h1>
     <hr>
-    <font color="white">
+    
     {% if news %} <!-- Если есть товары, то выводим таблицу с ними -->
         <table>
             <tr>
@@ -72,5 +72,5 @@ News
     {% else %}
         <h2>Товаров нет!</h2>
     {% endif %}
-    </font>
+</font>
 {% endblock content %}

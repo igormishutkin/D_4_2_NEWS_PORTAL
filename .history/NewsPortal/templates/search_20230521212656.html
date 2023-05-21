@@ -20,7 +20,7 @@
     }
    </style>
 
-{% extends 'flatpages/default.html' %}
+{% extends 'templates/news.html' %}
 
 {% load custom_filters %}
  
@@ -31,12 +31,12 @@ News
 {% block content %}
 <hr>
 <!-- Перед таблицей добавим форму для поиска -->
-<font color="black">
+
 <form method="GET">
     {{ filter.form }} <!-- Форму от фильтров за нас сделает Django. А вот кнопку, увы, придётся делать самому -->
     <input type="submit" value="Найти">
 </form>
-</font>
+
 <hr>
    
     <h1>Все новости</h1>
