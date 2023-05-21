@@ -1,0 +1,37 @@
+<!--  наследуемся от шаблона default.html, который мы создавали ещё во времена flatpages -->
+{% extends 'flatpages/default.html' %} 
+ 
+<!-- Название у нас будет proudcts -->
+
+{% block title %}
+News
+{% endblock title %}
+
+<!-- В контенте на странице мы выводим все товары -->
+{% block content %}
+<h1><p align="center">Все новости</p></h1>
+<h3><p align="center">{{ time_now|date:'d M Y' }}</p></h3> <!-- Здесь мы применяем фильтр date. Он очень похож на метод strftime у даты. С его помощью мы можем выводить дату в нужном нам формате -->
+    <hr>
+    {% if news %}
+    <table>
+        <tr>
+            <td>
+                Название
+            </td>
+            <td>
+                Описание
+            </td>
+            <td>
+                Категория
+            </td>           
+        </tr>
+    </table>
+        {% for p in news %}
+            <h3><p align="center">{{ p.category }} - {{ p.name }} - {{ p.description }}</p></h3>
+        {% endfor %}
+    {% else %} <!-- Если товаров нет, то говорим что товаров нет ;) -->
+        <h2><p align="center">Новостей нет!</p></h2>
+    {% endif %}
+
+{% endblock content %}
+</p>

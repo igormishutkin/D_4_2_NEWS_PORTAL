@@ -1,0 +1,26 @@
+
+{% extends 'flatpages/news.html' %}
+
+{% block title %} Find News {% endblock title %}
+
+{% load custom_template_funcs %}
+
+
+{% block content %}
+
+
+<hr>
+<!-- Перед таблицей добавим форму для поиска -->
+<form action="{% url 'post_list' %}" method="GET">
+    {{ post_search.form }} 
+    
+    <input type="submit" value="Найти">
+</form>
+
+<hr>
+
+
+
+
+
+{% endblock content %}
