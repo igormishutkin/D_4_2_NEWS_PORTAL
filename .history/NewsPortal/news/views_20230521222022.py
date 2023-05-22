@@ -31,7 +31,7 @@ class NewsDetail(DetailView):
 class News(View):
     
     def get(self, request):
-        news = News.objects.order_by('-id')
+        news = News.objects.order_by('-name')
         p = Paginator(news, 1) # создаём объект класса пагинатор, передаём ему список наших товаров и их количество для одной страницы
  
         news = p.get_page(request.GET.get('page', 1)) # берём номер страницы из get-запроса. Если ничего не передали, будем показывать первую страницу.
@@ -41,5 +41,3 @@ class News(View):
             'news': news,
         }
         return render(request, 'news.html', data)
-    
-

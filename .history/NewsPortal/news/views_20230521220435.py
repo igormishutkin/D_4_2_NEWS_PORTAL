@@ -1,5 +1,5 @@
-from django.views import View
-from django.views.generic import ListView, DetailView# импортируем класс, который говорит нам о том, что в этом представлении мы будем выводить список объектов из БД
+# from django.shortcuts import render
+from django.views.generic import ListView, DetailView # импортируем класс, который говорит нам о том, что в этом представлении мы будем выводить список объектов из БД
 from .models import News
 from datetime import datetime
 from django.shortcuts import render
@@ -21,25 +21,10 @@ class NewsList(ListView):
         context['value1'] = None # добавим ещё одну пустую переменную, чтобы на её примере посмотреть работу другого фильтра
         context['filter'] = NewsFilter(self.request.GET, queryset=self.get_queryset()) # вписываем наш фильтр в контекст
         return context
-    
  
 class NewsDetail(DetailView):
     model = News # модель всё та же, но мы хотим получать детали конкретно отдельного товара
     template_name = 'detail.html' # название шаблона будет product.html
     context_object_name = 'detail' # название объекта  
 
-class News(View):
-    
-    def get(self, request):
-        news = News.objects.order_by('-id')
-        p = Paginator(news, 1) # создаём объект класса пагинатор, передаём ему список наших товаров и их количество для одной страницы
- 
-        news = p.get_page(request.GET.get('page', 1)) # берём номер страницы из get-запроса. Если ничего не передали, будем показывать первую страницу.
-        # теперь вместо всех объектов в списке товаров хранится только нужная нам страница с товарами
-        
-        data = {
-            'news': news,
-        }
-        return render(request, 'news.html', data)
-    
 

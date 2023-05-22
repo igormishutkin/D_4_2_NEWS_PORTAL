@@ -41,5 +41,3 @@ class News(View):
             'news': news,
         }
         return render(request, 'news.html', data)
-    
-

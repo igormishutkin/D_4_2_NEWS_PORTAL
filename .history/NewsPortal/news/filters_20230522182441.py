@@ -10,5 +10,5 @@ class NewsFilter(FilterSet):
         fields = {
             'name': ['icontains'], # чтобы нам выводило имя хотя бы отдалённо похожее на то, что запросил пользователь
             'category' : ['exact'],
-            'time_creation' : ['gt']
+           
         }

@@ -31,7 +31,7 @@ class NewsDetail(DetailView):
 class News(View):
     
     def get(self, request):
-        news = News.objects.order_by('-id')
+        news = News.objects.order_by('-name')
         p = Paginator(news, 1) # создаём объект класса пагинатор, передаём ему список наших товаров и их количество для одной страницы
  
         news = p.get_page(request.GET.get('page', 1)) # берём номер страницы из get-запроса. Если ничего не передали, будем показывать первую страницу.
@@ -42,4 +42,17 @@ class News(View):
         }
         return render(request, 'news.html', data)
     
-
+class NewsSearch(ListView):
+    model = News  # указываем модель, объекты которой мы будем выводить
+    template_name = 'search.html'  # указываем имя шаблона, в котором будет лежать HTML, в нём будут все инструкции о том, как именно пользователю должны вывестись наши объекты
+    context_object_name = 'news'  # это имя списка, в котором будут лежать все объекты
+    queryset = News.objects.order_by('id')
+    
+    # метод get_context_data нужен нам для того, чтобы мы могли передать переменные в шаблон. 
+    # В возвращаемом словаре context будут храниться все переменные. 
+    # Ключи этого словари и есть переменные, к которым мы сможем потом обратиться через шаблон
+    #забираем отфильтрованные объекты переопределяя метод get_context_data у наследуемого класса 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['filter'] = NewsFilter(self.request.GET, queryset=self.get_queryset())
+        return context

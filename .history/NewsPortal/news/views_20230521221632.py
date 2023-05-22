@@ -40,6 +40,4 @@ class News(View):
         data = {
             'news': news,
         }
-        return render(request, 'news.html', data)
-    
-
+        return render(request, data)
